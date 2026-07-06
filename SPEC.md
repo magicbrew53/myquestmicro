@@ -49,7 +49,7 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 /vector-solutions/index.html  → to be built
 ```
 
-**Deployment:** Vercel, auto-deploy from `main`, project `myquest-sigma` at `myquest-sigma.vercel.app`. No outreach links are in circulation (Rico is paused), so the root move breaks nothing.
+**Deployment:** Vercel, auto-deploy from `main` on `github.com/magicbrew53/myquestmicro`, project `myquest-sigma` at `myquest-sigma.vercel.app`. No outreach links are in circulation (Rico is paused), so the root move breaks nothing.
 
 **Approved decisions (were `[VERIFY]`, now resolved):**
 - The footer white-logo `src` currently points at a Webflow CDN URL (`uploads-ssl.webflow.com/...white%20logo.png`). **Approved:** download once into `/images/` and reference locally on every page.
@@ -66,6 +66,8 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 8. Three theme cards, each with a content column and a gradient "pitch in one line" card
 9. Skill-map illustration (webp data URI) — named skills must fit the prospect's audience (Tooling U-SME version: Active Listening, Conflict Resolution, Incident Response)
 10. Pilot-shape card — the "Content" row names the prospect's catalog (e.g., "Layered on existing Tooling U-SME courses")
+11. Video-note phrase — {{VIDEO_NOTICED_PHRASE}} names what we noticed about the prospect (Tooling U-SME value: "your supervisor track")
+12. Pilot card Cohort row — {{PILOT_COHORT_ROW}} (Tooling U-SME value: "1 enterprise customer, 30–60 supervisors")
 
 **Shared chrome (identical on every page, defined by `/_template/`):**
 - Navbar: myQuest logo → myquest.co, Products dropdown (MQS / MQS LMS), Resources, Case Studies, Blog, About, "Book a demo" button (Calendly, prospect UTM), hamburger + mobile nav
@@ -94,7 +96,7 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 - **Framework:** none. Hand-authored static HTML, one file per site, CSS inline in `<head>`.
 - **Language:** HTML/CSS; minimal vanilla JS only if already present in the template.
 - **Routing/config:** one `vercel.json` at repo root, containing only the `/` → `https://www.myquest.co/partners` redirect (302). Nothing else lives in it without approval.
-- **Hosting:** Vercel, auto-deploy from `main` on `github.com/kothinti/myquest`. Project `myquest-sigma`.
+- **Hosting:** Vercel, auto-deploy from `main` on `github.com/magicbrew53/myquestmicro`. Project `myquest-sigma`.
 - **Dev environment:** `C:\dev\myquest`, Claude Code in VS Code, governed by `../MASTERSPEC.md` + this file.
 - **Assets:** shared images in `/images/` referenced by **root-relative paths** (`/images/myquest-logo.png`) from every page; prospect-specific images embedded as data URIs inside each page's HTML.
 
