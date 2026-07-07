@@ -321,6 +321,8 @@ section {
 .gap-body strong { color: var(--ink); font-weight: 600; }
 .gap-body em { font-style: italic; color: var(--ink); }
 
+.gap-grid > div:first-child .pullquote { margin-top: 2rem; }
+
 .pullquote {
   background: white;
   border-radius: var(--radius);
@@ -1230,16 +1232,15 @@ section {
       <div>
         <div class="section-eyebrow">The context</div>
         <h2 class="section-title">{{GAP_TITLE}}</h2>
-      </div>
-      <div class="gap-body">
-        {{GAP_BODY}}
-
         <blockquote class="pullquote">
           <p class="pullquote-text">
             {{PULLQUOTE}}
           </p>
           <cite class="pullquote-cite">— {{PULLQUOTE_ATTRIBUTION}}</cite>
         </blockquote>
+      </div>
+      <div class="gap-body">
+        {{GAP_BODY}}
       </div>
     </div>
   </div>
