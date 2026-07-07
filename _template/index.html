@@ -321,6 +321,57 @@ section {
 .gap-body strong { color: var(--ink); font-weight: 600; }
 .gap-body em { font-style: italic; color: var(--ink); }
 
+.layer-stack {
+  margin-top: 1.5rem;
+  max-width: 420px;
+}
+.layer-missing {
+  border: 1.5px dashed var(--mq-blue);
+  background: var(--mq-blue-soft);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+}
+.layer-missing-badge {
+  display: inline-block;
+  background: var(--mq-blue);
+  color: white;
+  text-transform: uppercase;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+.layer-label {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+.layer-sub {
+  font-size: 0.8rem;
+}
+.layer-missing .layer-label { color: var(--mq-blue-deep); }
+.layer-missing .layer-sub { color: var(--ink-soft); }
+.layer-connector {
+  width: 1.5px;
+  height: 14px;
+  background: var(--rule-strong);
+  margin: 0 auto;
+}
+.layer-track,
+.layer-catalog {
+  background: var(--paper);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+}
+.layer-track { margin-bottom: 8px; }
+.layer-track .layer-label,
+.layer-catalog .layer-label { color: var(--ink); }
+.layer-track .layer-sub,
+.layer-catalog .layer-sub { color: var(--ink-muted); }
+
 .pullquote {
   background: white;
   border-radius: var(--radius);
@@ -1230,6 +1281,22 @@ section {
       <div>
         <div class="section-eyebrow">The context</div>
         <h2 class="section-title">{{GAP_TITLE}}</h2>
+        <div class="layer-stack">
+          <div class="layer-missing">
+            <span class="layer-missing-badge">The missing layer</span>
+            <div class="layer-label">Skill-building layer</div>
+            <div class="layer-sub">Content becomes measured capability</div>
+          </div>
+          <div class="layer-connector"></div>
+          <div class="layer-track">
+            <div class="layer-label">{{LAYER_TRACK_LABEL}}</div>
+            <div class="layer-sub">{{LAYER_TRACK_SUB}}</div>
+          </div>
+          <div class="layer-catalog">
+            <div class="layer-label">{{LAYER_CATALOG_LABEL}}</div>
+            <div class="layer-sub">{{LAYER_CATALOG_SUB}}</div>
+          </div>
+        </div>
       </div>
       <div class="gap-body">
         {{GAP_BODY}}

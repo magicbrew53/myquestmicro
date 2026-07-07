@@ -68,6 +68,7 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 10. Pilot-shape card — the "Content" row names the prospect's catalog (e.g., "Layered on existing Tooling U-SME courses")
 11. Video-note phrase — {{VIDEO_NOTICED_PHRASE}} names what we noticed about the prospect (Tooling U-SME value: "your supervisor track")
 12. Pilot card Cohort row — {{PILOT_COHORT_ROW}} (Tooling U-SME value: "1 enterprise customer, 30–60 supervisors")
+13. Layer-stack graphic (gap section, left column) — two per-prospect label pairs: {{LAYER_TRACK_LABEL}}/{{LAYER_TRACK_SUB}} and {{LAYER_CATALOG_LABEL}}/{{LAYER_CATALOG_SUB}} (Tooling U-SME values: "Leadership track" / "Concepts in Manufacturing Leadership · four levels" and "Technical catalog" / "Machining · welding · measurement · safety"). The missing-layer card's copy is shared chrome.
 
 **Shared chrome (identical on every page, defined by `/_template/`):**
 - Navbar: myQuest logo → myquest.co, Products dropdown (MQS / MQS LMS), Resources, Case Studies, Blog, About, "Book a demo" button (Calendly, prospect UTM), hamburger + mobile nav
