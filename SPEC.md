@@ -64,7 +64,7 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 6. Gap section: title, body argument, pullquote card sourced from the **prospect's own published materials**
 7. Video section: heading + Vimeo embed (`?title=0&byline=0&portrait=0&dnt=1`; Tooling U-SME ID is `1197951399`)
 8. Three theme cards, each with a content column and a gradient "pitch in one line" card
-9. Skill-map illustration (webp data URI) — named skills must fit the prospect's audience (Tooling U-SME version: Active Listening, Conflict Resolution, Incident Response)
+9. Skill-map illustration (webp data URI) — named skills must fit the prospect's audience (Tooling U-SME version: Active Listening, Conflict Resolution, Incident Response). Approved decision (2026-07-07): all five sites use the same illustration (the Tooling U-SME original, copied verbatim); only the alt text varies per prospect.
 10. Pilot-shape card — the "Content" row names the prospect's catalog (e.g., "Layered on existing Tooling U-SME courses")
 11. Video-note phrase — {{VIDEO_NOTICED_PHRASE}} names what we noticed about the prospect (Tooling U-SME value: "your supervisor track")
 12. Pilot card Cohort row — {{PILOT_COHORT_ROW}} (Tooling U-SME value: "1 enterprise customer, 30–60 supervisors")
