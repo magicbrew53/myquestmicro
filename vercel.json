@@ -1,0 +1,9 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.myquest.co/partners",
+      "permanent": false
+    }
+  ]
+}
