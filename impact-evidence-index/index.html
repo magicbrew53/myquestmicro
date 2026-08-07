@@ -1116,7 +1116,6 @@ section {
 <style>
 /* ===== Impact Evidence Index (page-scoped, iei- prefixed) ===== */
 .iei-wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px;}
-.iei-badge{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--mq-blue-soft);color:var(--mq-blue-deep);border:1px solid #c9d8ff;padding:3px 10px;border-radius:20px;margin-bottom:18px;}
 .iei-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:40px;box-shadow:0 2px 14px rgba(0,44,196,.06);}
 .iei-h1{font-size:36px;line-height:1.12;margin:0 0 14px;color:var(--ink);font-weight:800;}
 .iei-h1 .iei-accent{color:var(--mq-blue);}
@@ -1136,11 +1135,6 @@ section {
 .iei-opt:hover{border-color:var(--mq-blue);background:var(--mq-blue-soft);}
 .iei-opt.iei-selected{border-color:var(--mq-blue);background:var(--mq-blue-soft);}
 .iei-nav-row{display:flex;justify-content:space-between;margin-top:22px;}
-.iei-field{margin-bottom:16px;}
-.iei-field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink-soft);}
-.iei-field input{width:100%;box-sizing:border-box;padding:12px 14px;font-family:inherit;font-size:15px;border:1.5px solid var(--rule);border-radius:8px;}
-.iei-field input:focus{outline:none;border-color:var(--mq-blue);}
-.iei-fineprint{font-size:12px;color:var(--ink-muted);margin-top:14px;}
 .iei-score-hero{text-align:center;padding:10px 0 26px;}
 .iei-dial{position:relative;width:190px;height:190px;margin:0 auto 14px;}
 .iei-dial svg{transform:rotate(-90deg);}
@@ -1229,8 +1223,6 @@ section {
 
 <main>
 <div class="iei-wrap">
-  <span class="iei-badge">Preview — form not yet connected</span>
-
   <!-- ============ SCREEN 1: LANDING ============ -->
   <div id="iei-intro" class="iei-card">
     <h1 class="iei-h1">The Impact <span class="iei-accent">Evidence</span> Index</h1>
@@ -1260,19 +1252,7 @@ section {
     </div>
   </div>
 
-  <!-- ============ SCREEN 3: LEAD CAPTURE ============ -->
-  <div id="iei-gate" class="iei-card iei-hidden">
-    <h1 class="iei-h1" style="font-size:26px;">Your Evidence Score is ready.</h1>
-    <p class="iei-sub">Tell us where to send your full breakdown — including your weakest evidence dimension and what to fix first.</p>
-    <!-- TODO before launch: wire this form to HubSpot (Nicole's mini-campaign) -->
-    <div class="iei-field"><label>First name</label><input type="text" id="iei-f-name" placeholder="Jane"></div>
-    <div class="iei-field"><label>Work email</label><input type="email" id="iei-f-email" placeholder="jane@trainingco.com"></div>
-    <div class="iei-field"><label>Company</label><input type="text" id="iei-f-company" placeholder="Training Co."></div>
-    <button class="iei-btn" onclick="ieiResults()">Show My Score →</button>
-    <p class="iei-fineprint">We’ll email you your results. No spam — one follow-up, that’s it.</p>
-  </div>
-
-  <!-- ============ SCREEN 4: RESULTS ============ -->
+  <!-- ============ SCREEN 3: RESULTS ============ -->
   <div id="iei-results" class="iei-card iei-hidden">
     <div class="iei-score-hero">
       <div class="iei-dial">
@@ -1489,7 +1469,7 @@ let ieiCurrent = 0;
 const ieiAnswers = new Array(IEI_QUESTIONS.length).fill(null);
 
 function ieiShow(id){
-  ["iei-intro","iei-q","iei-gate","iei-results"].forEach(s =>
+  ["iei-intro","iei-q","iei-results"].forEach(s =>
     document.getElementById(s).classList.toggle("iei-hidden", s !== id));
   window.scrollTo({top:0});
 }
@@ -1520,12 +1500,11 @@ function ieiRender(){
 
 function ieiNext(){
   if(ieiCurrent < IEI_QUESTIONS.length-1){ ieiCurrent++; ieiRender(); }
-  else ieiShow("iei-gate");
+  else ieiResults();
 }
 function ieiPrev(){ if(ieiCurrent>0){ ieiCurrent--; ieiRender(); } }
 
 function ieiResults(){
-  // TODO before launch: capture iei-f-name / iei-f-email / iei-f-company -> HubSpot here
   const dimScores = IEI_DIMS.map(()=>({got:0,max:0}));
   IEI_QUESTIONS.forEach((q,i)=>{ dimScores[q.dim].got += ieiAnswers[i]??0; dimScores[q.dim].max += 3; });
   const total = dimScores.reduce((s,d)=>s+d.got,0);
