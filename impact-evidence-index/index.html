@@ -1,0 +1,1573 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Impact Evidence Index | myQuest</title>
+<meta name="description" content="Could you prove your training changed behavior — before vs. after? Score how much of your training’s impact you can evidence, in under 3 minutes.">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<link rel="canonical" href="https://myquest-sigma.vercel.app/impact-evidence-index/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  /* myQuest brand */
+  --mq-blue: #0046FF;
+  --mq-blue-deep: #002CC4;
+  --mq-blue-soft: #E8EEFF;
+  --mq-lavender: #9383CE;
+  --mq-lavender-soft: #F0EDFA;
+  --mq-cyan: #68A4D6;
+  --mq-cyan-soft: #E8F2FB;
+
+  --ink: #0F1419;
+  --ink-soft: #3D4654;
+  --ink-muted: #6B7484;
+  --paper: #FFFFFF;
+  --paper-warm: #FAFBFD;
+  --paper-card: #F5F7FA;
+  --rule: #E5E9EF;
+  --rule-strong: #CDD3DD;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-lg: 24px;
+
+  --shadow-sm: 0 1px 2px rgba(15, 20, 25, 0.04);
+  --shadow: 0 4px 16px rgba(15, 20, 25, 0.06), 0 1px 2px rgba(15, 20, 25, 0.04);
+  --shadow-lg: 0 20px 60px -20px rgba(15, 20, 25, 0.18), 0 8px 24px -8px rgba(15, 20, 25, 0.08);
+
+  --maxw: 1200px;
+  --gutter: clamp(1.25rem, 4vw, 2rem);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.wrap {
+  width: min(var(--maxw), 100% - calc(var(--gutter) * 2));
+  margin-inline: auto;
+}
+
+a { color: var(--mq-blue); text-decoration: none; }
+a:hover { color: var(--mq-blue-deep); }
+
+::selection { background: var(--mq-blue); color: white; }
+
+/* ============ HERO TOP ROW (inline CTA pattern, no separate header) ============ */
+.hero-top-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.hero-cta-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  background: var(--mq-blue);
+  color: white;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--mq-blue);
+  transition: all 0.18s ease;
+  box-shadow: 0 4px 12px -2px rgba(0, 70, 255, 0.3);
+}
+.hero-cta-inline:hover {
+  background: var(--mq-blue-deep);
+  border-color: var(--mq-blue-deep);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px -4px rgba(0, 70, 255, 0.5);
+}
+.hero-cta-inline .arrow {
+  font-size: 1.1rem;
+  line-height: 1;
+  transition: transform 0.18s ease;
+}
+.hero-cta-inline:hover .arrow { transform: translateX(3px); }
+
+@media (max-width: 560px) {
+  .hero-top-row { flex-direction: column; align-items: flex-start; }
+}
+
+/* ============ HERO ============ */
+.hero {
+  padding: clamp(2rem, 5vw, 3.5rem) 0 clamp(3rem, 6vw, 5rem);
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -200px;
+  right: -200px;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, var(--mq-lavender-soft) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: -150px;
+  left: -150px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, var(--mq-cyan-soft) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+.partnership-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.55rem 1rem 0.55rem 0.55rem;
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--ink-soft);
+  box-shadow: var(--shadow-sm);
+}
+.partnership-tag .dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background: var(--mq-blue);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.partnership-tag .partnership-tag-divider {
+  width: 1px;
+  height: 14px;
+  background: var(--rule);
+}
+
+.hero h1 {
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+  max-width: 19ch;
+  color: var(--ink);
+}
+.hero h1 .accent {
+  color: var(--mq-blue);
+  position: relative;
+  white-space: nowrap;
+}
+
+.hero-lede {
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: 0 0 2.5rem;
+  line-height: 1.55;
+}
+
+.hero-cobrand {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1rem 1.5rem;
+  background: #000;
+  border-radius: var(--radius);
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow);
+}
+.hero-cobrand img {
+  display: block;
+  width: auto;
+}
+.hero-cobrand img.mq { height: 28px; }
+.hero-cobrand img.tu { height: 22px; }
+.hero-cobrand .cb-x {
+  color: rgba(255,255,255,0.4);
+  font-size: 1.1rem;
+  font-weight: 300;
+}
+
+.hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+  max-width: 720px;
+}
+.stat-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow);
+}
+.stat-num {
+  font-size: clamp(2rem, 3vw, 2.5rem);
+  font-weight: 700;
+  color: var(--mq-blue);
+  line-height: 1;
+  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+}
+.stat-num span { font-size: 0.6em; color: var(--ink-muted); margin-left: 0.1em; }
+.stat-label {
+  font-size: 0.88rem;
+  color: var(--ink-soft);
+  line-height: 1.4;
+}
+@media (max-width: 720px) {
+  .hero-stats { grid-template-columns: 1fr; }
+  .hero-cobrand { gap: 0.85rem; padding: 0.85rem 1.2rem; }
+  .hero-cobrand img.mq { height: 24px; }
+  .hero-cobrand img.tu { height: 18px; }
+}
+
+/* ============ SECTIONS ============ */
+section {
+  padding: clamp(3.5rem, 7vw, 6rem) 0;
+}
+.section-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--mq-blue);
+  margin-bottom: 1.25rem;
+}
+.section-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 2px;
+  background: var(--mq-blue);
+}
+.section-title {
+  font-size: clamp(1.85rem, 3.8vw, 3rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  margin: 0 0 1.5rem;
+  max-width: 22ch;
+  color: var(--ink);
+}
+.section-lede {
+  font-size: 1.1rem;
+  color: var(--ink-soft);
+  max-width: 60ch;
+  margin: 0 0 3rem;
+  line-height: 1.55;
+}
+
+/* ============ THE GAP ============ */
+.gap-section {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.gap-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  align-items: start;
+}
+@media (max-width: 860px) { .gap-grid { grid-template-columns: 1fr; } }
+
+.gap-body p {
+  font-size: 1.1rem;
+  line-height: 1.65;
+  color: var(--ink-soft);
+  margin: 0 0 1.25rem;
+}
+.gap-body p:last-of-type { margin-bottom: 2rem; }
+.gap-body strong { color: var(--ink); font-weight: 600; }
+.gap-body em { font-style: italic; color: var(--ink); }
+
+.gap-grid > div:first-child .pullquote { margin-top: 2rem; }
+
+.pullquote {
+  background: white;
+  border-radius: var(--radius);
+  border: 1px solid var(--rule);
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  position: relative;
+}
+.pullquote::before {
+  content: '"';
+  position: absolute;
+  top: -10px;
+  left: 24px;
+  font-size: 5rem;
+  line-height: 1;
+  color: var(--mq-blue);
+  font-weight: 700;
+  font-family: Georgia, serif;
+}
+.pullquote-text {
+  font-size: 1.1rem;
+  line-height: 1.5;
+  color: var(--ink);
+  font-weight: 500;
+  margin: 0 0 1rem;
+}
+.pullquote-cite {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+}
+
+/* ============ THEMES ============ */
+.themes-grid {
+  display: grid;
+  gap: 1.5rem;
+}
+.theme-card {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2.5rem;
+  align-items: start;
+}
+.theme-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+  border-color: var(--mq-blue);
+}
+@media (max-width: 900px) {
+  .theme-card { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+.theme-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.theme-number-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  height: 36px;
+  padding: 0 0.85rem;
+  background: var(--mq-blue-soft);
+  color: var(--mq-blue);
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+}
+.theme-number-pill span {
+  margin-right: 0.5rem;
+  font-weight: 600;
+  opacity: 0.6;
+}
+
+.theme-card h3 {
+  font-size: clamp(1.35rem, 2vw, 1.65rem);
+  line-height: 1.2;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  color: var(--ink);
+}
+.theme-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--ink-soft);
+  margin: 0 0 1rem;
+}
+.theme-card p:last-child { margin-bottom: 0; }
+.theme-card strong { color: var(--ink); font-weight: 600; }
+.theme-card em { font-style: italic; color: var(--ink); }
+
+.theme-pitch-card {
+  background: linear-gradient(135deg, var(--mq-blue-soft) 0%, var(--mq-lavender-soft) 100%);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  border: 1px solid rgba(0, 70, 255, 0.08);
+}
+.theme-pitch-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mq-blue);
+  margin-bottom: 0.6rem;
+}
+.theme-pitch-text {
+  font-size: 1rem;
+  line-height: 1.45;
+  color: var(--ink);
+  font-weight: 500;
+  font-style: italic;
+}
+
+/* ============ HOW IT WORKS ============ */
+.how-section {
+  background: linear-gradient(180deg, var(--paper) 0%, var(--paper-warm) 100%);
+  border-top: 1px solid var(--rule);
+}
+.flow-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 900px) { .flow-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .flow-grid { grid-template-columns: 1fr; } }
+
+.flow-step {
+  background: white;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  padding: 1.75rem 1.5rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+.flow-num {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--mq-blue);
+  color: white;
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 0.95rem;
+  margin-bottom: 1rem;
+  box-shadow: 0 4px 12px rgba(0, 70, 255, 0.25);
+}
+.flow-step h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin: 0 0 0.5rem;
+  color: var(--ink);
+  line-height: 1.25;
+}
+.flow-step p {
+  font-size: 0.94rem;
+  color: var(--ink-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ============ NEXT STEP ============ */
+.next-section {
+  background: var(--ink);
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+.next-section::before {
+  content: '';
+  position: absolute;
+  top: -100px;
+  right: -100px;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(0, 70, 255, 0.25) 0%, transparent 60%);
+  pointer-events: none;
+}
+.next-section::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  left: -100px;
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(147, 131, 206, 0.18) 0%, transparent 60%);
+  pointer-events: none;
+}
+.next-section .wrap { position: relative; z-index: 1; }
+
+.next-section .section-eyebrow {
+  color: var(--mq-cyan);
+}
+.next-section .section-eyebrow::before {
+  background: var(--mq-cyan);
+}
+.next-section .section-title {
+  color: white;
+}
+
+.next-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 860px) { .next-grid { grid-template-columns: 1fr; } }
+
+.next-copy p {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 1.25rem;
+}
+.next-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.75rem;
+  background: var(--mq-blue);
+  color: white;
+  font-weight: 600;
+  font-size: 1.05rem;
+  border-radius: 999px;
+  margin-top: 1rem;
+  transition: all 0.2s ease;
+  box-shadow: 0 8px 24px -6px rgba(0, 70, 255, 0.5);
+}
+.next-cta:hover {
+  background: white;
+  color: var(--ink);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(255, 255, 255, 0.3);
+}
+.next-cta .arrow {
+  font-size: 1.2rem;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+.next-cta:hover .arrow { transform: translateX(3px); }
+
+.pilot-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+.pilot-card h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0 0 1.25rem;
+  color: white;
+}
+.pilot-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.pilot-list li {
+  display: grid;
+  grid-template-columns: 110px 1fr;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: baseline;
+}
+.pilot-list li:last-child { border-bottom: none; padding-bottom: 0; }
+.pilot-list li:first-child { padding-top: 0; }
+.pilot-key {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+.pilot-val {
+  font-size: 0.98rem;
+  color: rgba(255,255,255,0.95);
+}
+
+
+/* ============ VIDEO SECTION (personal note from Rico) ============ */
+.video-section {
+  background: var(--paper-warm);
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.video-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 860px) { .video-grid { grid-template-columns: 1fr; } }
+
+.video-copy .section-eyebrow { color: var(--mq-blue); }
+.video-copy h2 {
+  font-size: clamp(1.6rem, 3vw, 2.25rem);
+  line-height: 1.15;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+  margin: 0 0 1rem;
+  color: var(--ink);
+  max-width: 22ch;
+}
+.video-copy p {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+  margin: 0 0 0.8rem;
+  max-width: 48ch;
+}
+.video-attribution {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+.video-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--mq-blue), var(--mq-lavender));
+  display: inline-grid;
+  place-items: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: -0.01em;
+  flex-shrink: 0;
+}
+.video-attribution-text {
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+.video-attribution-name { font-weight: 600; color: var(--ink); }
+.video-attribution-role { color: var(--ink-muted); font-size: 0.85rem; }
+
+.video-frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+.video-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+
+/* ============ THEME 3 HERO IMAGE ============ */
+.theme-with-image {
+  grid-template-columns: 1fr;
+}
+.theme-image-row {
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+.theme-image-caption {
+  font-size: 0.85rem;
+  color: var(--ink-muted);
+  font-weight: 500;
+  text-align: center;
+  letter-spacing: 0.01em;
+}
+.theme-image-caption strong { color: var(--ink); font-weight: 600; }
+.theme-image-wrapper {
+  background: linear-gradient(135deg, var(--mq-blue-soft) 0%, var(--mq-lavender-soft) 60%, var(--mq-cyan-soft) 100%);
+  border-radius: var(--radius);
+  padding: clamp(1rem, 3vw, 2rem) clamp(0.5rem, 2vw, 1.5rem) 0;
+  border: 1px solid rgba(0, 70, 255, 0.08);
+  overflow: hidden;
+}
+.theme-image-wrapper img {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  height: auto;
+  margin: 0 auto;
+}
+
+/* ============ TRUST STRIP ============ */
+.trust-strip {
+  background: white;
+  border-top: 1px solid var(--rule);
+  padding: clamp(2.5rem, 5vw, 3.5rem) 0;
+}
+.trust-strip-inner {
+  text-align: center;
+}
+.trust-strip-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-muted);
+  margin-bottom: 1.5rem;
+}
+.trust-strip-logos {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: block;
+  opacity: 0.85;
+  filter: grayscale(1);
+  transition: opacity 0.2s ease;
+}
+.trust-strip-logos:hover { opacity: 1; }
+.trust-strip-note {
+  margin-top: 1rem;
+  font-size: 0.78rem;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+/* ============ FOCUS ============ */
+:focus-visible {
+  outline: 2px solid var(--mq-blue);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.partnership-tag, .hero h1, .hero-cobrand, .hero-lede, .hero-stats {
+  animation: fadeUp 0.7s cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+.hero h1 { animation-delay: 0.08s; }
+.hero-cobrand { animation-delay: 0.16s; }
+.hero-lede { animation-delay: 0.24s; }
+.hero-stats { animation-delay: 0.32s; }
+
+/* ============ NAVBAR & MOBILE NAV STYLE ============ */
+.no-scroll {
+  overflow: hidden;
+}
+.navbar {
+  position: relative;
+  z-index: 9999;
+  background-color: #ffffff;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.container-1280 {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.navbar-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.navbar-left {
+  display: flex;
+  align-items: center;
+  gap: 48px;
+}
+.navbar-left img {
+  display: block;
+}
+.nav-menu-new {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+.nav-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #251d44;
+  text-decoration: none;
+  padding-bottom: 4px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+.nav-text:hover {
+  border-bottom-color: #5c6bc0;
+}
+.dropdown {
+  position: relative;
+}
+.dropdown.hide {
+  display: none;
+}
+.uc-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+.dropdown-arrow {
+  border: solid #251d44;
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 3px;
+  transform: rotate(45deg);
+  margin-bottom: 2px;
+  transition: transform 0.2s ease;
+}
+.dropdown:hover .dropdown-arrow {
+  transform: rotate(-135deg);
+  margin-bottom: -2px;
+}
+.uc-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(15, 20, 25, 0.12);
+  border: 1px solid var(--rule);
+  padding: 8px 0;
+  min-width: 180px;
+  display: none;
+  flex-direction: column;
+  z-index: 10000;
+}
+.dropdown:hover .uc-dropdown {
+  display: flex;
+}
+.uc-dropdown-link {
+  font-size: 15px;
+  font-weight: 500;
+  color: #251d44;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.uc-dropdown-link:hover {
+  background-color: #f0edfa;
+  color: #5c6bc0;
+}
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.navbar-right .btn-primary-v2 {
+  background-color: var(--mq-blue);
+  color: #ffffff;
+  border: 1px solid var(--mq-blue);
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+.navbar-right .btn-primary-v2:hover {
+  background-color: var(--mq-blue-deep);
+  border-color: var(--mq-blue-deep);
+  color: #ffffff;
+}
+.hamburger-icon {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+}
+.hamburger-icon div {
+  width: 100%;
+  height: 2px;
+  background-color: #251d44;
+  transition: all 0.2s ease;
+}
+.mobile-nav {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .hide-on-tab {
+    display: none !important;
+  }
+  .hamburger-icon {
+    display: flex;
+  }
+  .navbar-right .btn-primary-v2.hide-on-tab {
+    display: none;
+  }
+  .hamburger-icon.active .hamburger-top-line {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .hamburger-icon.active .hamburger-mid-line {
+    opacity: 0;
+  }
+  .hamburger-icon.active .hamburger-bottom-line {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    z-index: 9999;
+    padding: 24px;
+    overflow-y: auto;
+    border-top: 1px solid var(--rule);
+  }
+  .mobile-nav .nav-menu-new {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  .mobile-nav .nav-text {
+    font-size: 18px;
+    width: 100%;
+    display: block;
+  }
+  .mobile-nav .dropdown {
+    width: 100%;
+  }
+  .mobile-nav .uc-dropdown {
+    position: static;
+    box-shadow: none;
+    border: none;
+    padding: 8px 0 8px 16px;
+    display: none;
+    background-color: #fcfbfe;
+  }
+  .mobile-nav .uc-dropdown-link {
+    font-size: 16px;
+  }
+  .mobile-nav .btn-primary-v2 {
+    display: block;
+    text-align: center;
+    background-color: var(--mq-blue);
+    color: #ffffff;
+    border: 1px solid var(--mq-blue);
+    border-radius: 8px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+  }
+}
+
+/* ============ FOOTER STYLE ============ */
+.my-footer {
+  color: #ffffff;
+  background-color: #17192d;
+  padding: 60px 0;
+  font-family: Lato, sans-serif;
+}
+.container-1282 {
+  width: 100%;
+  max-width: 1340px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+.my-footer .align-center {
+  text-align: center;
+  padding: 0;
+}
+.my-footer .logo-image {
+  width: 150px;
+}
+.footer-para {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  font-size: 18px;
+  line-height: 120%;
+  color: #ffffff;
+}
+.spacer-2._40 {
+  height: 40px;
+}
+.spacer-2._24 {
+  height: 24px;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1.2fr 1.3fr;
+  gap: 32px;
+}
+.footer-block-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: left;
+}
+.footer-main-text {
+  font-size: 16px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+.footer-logo-block {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: #c4cff2;
+}
+.footer-img {
+  width: 90px;
+}
+.footer-img-2 {
+  width: 60px;
+}
+.t-footer-wrap {
+  display: block;
+}
+.footer-nav-link-2 {
+  color: #c4cff2;
+  font-size: 15px;
+  line-height: 140%;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+.footer-nav-link-2:hover {
+  color: #ffffff;
+}
+.btn-footer {
+  background-color: var(--mq-blue);
+  color: #ffffff;
+  border: 1px solid var(--mq-blue);
+  border-radius: 8px;
+  padding: 12px 28px;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+.btn-footer:hover {
+  background-color: var(--mq-blue-deep);
+  border-color: var(--mq-blue-deep);
+  color: #ffffff;
+}
+.copy-right-bar {
+  color: #ffffff;
+  background-color: #111423;
+  padding: 20px 0;
+  font-family: Lato, sans-serif;
+  font-size: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+.copyright-block {
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+</style>
+
+<style>
+/* ===== Impact Evidence Index (page-scoped, iei- prefixed) ===== */
+.iei-wrap{max-width:760px;margin:0 auto;padding:48px 24px 96px;}
+.iei-badge{display:inline-block;font-size:11px;letter-spacing:.12em;text-transform:uppercase;background:var(--mq-blue-soft);color:var(--mq-blue-deep);border:1px solid #c9d8ff;padding:3px 10px;border-radius:20px;margin-bottom:18px;}
+.iei-card{background:var(--paper);border:1px solid var(--rule);border-radius:16px;padding:40px;box-shadow:0 2px 14px rgba(0,44,196,.06);}
+.iei-h1{font-size:36px;line-height:1.12;margin:0 0 14px;color:var(--ink);font-weight:800;}
+.iei-h1 .iei-accent{color:var(--mq-blue);}
+.iei-sub{font-size:17px;color:var(--ink-soft);margin:0 0 22px;}
+.iei-meta{display:flex;flex-wrap:wrap;gap:20px;font-size:13px;color:var(--ink-muted);margin-bottom:30px;}
+.iei-meta span::before{content:"\2022";color:var(--mq-blue);margin-right:6px;}
+.iei-btn{display:inline-block;background:var(--mq-blue);color:#fff;border:none;font-family:inherit;font-size:16px;font-weight:600;padding:14px 30px;border-radius:10px;cursor:pointer;text-decoration:none;transition:background .15s;}
+.iei-btn:hover{background:var(--mq-blue-deep);}
+.iei-btn.iei-secondary{background:transparent;color:var(--ink-muted);border:1px solid var(--rule);font-weight:500;}
+.iei-btn.iei-secondary:hover{background:var(--paper-warm);}
+.iei-progress-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;font-size:13px;color:var(--ink-muted);}
+.iei-bar{height:6px;background:var(--rule);border-radius:3px;overflow:hidden;margin-bottom:28px;}
+.iei-bar-fill{height:100%;background:var(--mq-blue);width:0%;transition:width .25s;}
+.iei-dim-tag{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mq-blue);margin-bottom:10px;}
+.iei-q-text{font-size:21px;font-weight:600;margin-bottom:22px;color:var(--ink);}
+.iei-opt{display:block;width:100%;text-align:left;background:var(--paper);border:1.5px solid var(--rule);border-radius:10px;padding:14px 18px;font-family:inherit;font-size:15px;color:var(--ink);cursor:pointer;margin-bottom:10px;transition:border .12s, background .12s;}
+.iei-opt:hover{border-color:var(--mq-blue);background:var(--mq-blue-soft);}
+.iei-opt.iei-selected{border-color:var(--mq-blue);background:var(--mq-blue-soft);}
+.iei-nav-row{display:flex;justify-content:space-between;margin-top:22px;}
+.iei-field{margin-bottom:16px;}
+.iei-field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:var(--ink-soft);}
+.iei-field input{width:100%;box-sizing:border-box;padding:12px 14px;font-family:inherit;font-size:15px;border:1.5px solid var(--rule);border-radius:8px;}
+.iei-field input:focus{outline:none;border-color:var(--mq-blue);}
+.iei-fineprint{font-size:12px;color:var(--ink-muted);margin-top:14px;}
+.iei-score-hero{text-align:center;padding:10px 0 26px;}
+.iei-dial{position:relative;width:190px;height:190px;margin:0 auto 14px;}
+.iei-dial svg{transform:rotate(-90deg);}
+.iei-dial .iei-num{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+.iei-dial .iei-num strong{font-size:44px;line-height:1;color:var(--ink);}
+.iei-dial .iei-num small{font-size:12px;color:var(--ink-muted);letter-spacing:.08em;text-transform:uppercase;margin-top:4px;}
+.iei-band-label{display:inline-block;font-size:14px;font-weight:700;padding:6px 16px;border-radius:20px;margin-bottom:10px;}
+.iei-band-desc{max-width:520px;margin:0 auto;color:var(--ink-soft);font-size:15px;}
+.iei-dims{margin:30px 0 8px;}
+.iei-dim-row{margin-bottom:18px;}
+.iei-dim-head{display:flex;justify-content:space-between;font-size:14px;font-weight:600;margin-bottom:6px;color:var(--ink);}
+.iei-dim-head span:last-child{color:var(--ink-muted);font-weight:500;}
+.iei-dim-bar{height:10px;background:var(--rule);border-radius:5px;overflow:hidden;}
+.iei-dim-fill{height:100%;border-radius:5px;transition:width .5s;}
+.iei-gap-box{background:var(--mq-blue-soft);border:1px solid #c9d8ff;border-radius:10px;padding:18px 20px;margin-top:24px;}
+.iei-gap-box h3{font-size:15px;margin:0 0 8px;color:var(--ink);}
+.iei-gap-box ul{margin:0 0 0 18px;padding:0;font-size:14px;color:var(--ink-soft);}
+.iei-gap-box li{margin-bottom:6px;}
+.iei-cta-block{text-align:center;margin-top:34px;padding-top:28px;border-top:1px solid var(--rule);}
+.iei-cta-block p{font-size:16px;margin-bottom:16px;color:var(--ink);}
+.iei-hidden{display:none;}
+@media (max-width:600px){ .iei-card{padding:26px 20px;} .iei-h1{font-size:28px;} }
+</style>
+</head>
+<body>
+
+<div class="navbar">
+  <div class="container-1280">
+    <div class="navbar-wrapper">
+      <div class="navbar-left">
+        <a href="https://www.myquest.co/" class="w-inline-block"><img width="127" loading="lazy" alt="myQuest Logo" src="/images/myquest-logo.png"></a>
+        <div class="hide-on-tab">
+          <nav class="nav">
+            <div class="nav-menu-new">
+              <div class="dropdown">
+                <div class="uc-dropdown-toggle">
+                  <div class="nav-text">Products</div>
+                  <div class="dropdown-arrow"></div>
+                </div>
+                <nav class="uc-dropdown">
+                  <a href="https://www.myquest.co/myquest-skills" class="uc-dropdown-link">MyQuest Skills</a>
+                  <a href="https://www.myquest.co/myquest-lms" class="uc-dropdown-link">MyQuest LMS</a>
+                </nav>
+              </div>
+              <a href="https://www.myquest.co/resource-center" class="nav-text">Resources</a>
+              <a href="https://www.myquest.co/case-studies" class="nav-text">Case Studies</a>
+              <a href="https://www.myquest.co/blog" class="nav-text">Blog</a>
+              <a href="https://www.myquest.co/about" class="nav-text">About</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="navbar-right">
+        <a href="https://calendly.com/partnerships-10/myquest-parternship-call-website/?utm_source=impact-evidence-index-partnership" target="_blank" class="btn-primary-v2 hide-on-tab">Book a demo</a>
+        <a href="#" class="hamburger-icon">
+          <div class="hamburger-top-line"></div>
+          <div class="hamburger-mid-line"></div>
+          <div class="hamburger-bottom-line"></div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="mobile-nav">
+    <nav class="nav">
+      <div class="nav-menu-new">
+        <div class="dropdown">
+          <div class="uc-dropdown-toggle">
+            <div class="nav-text">Products</div>
+            <div class="dropdown-arrow"></div>
+          </div>
+          <nav class="uc-dropdown">
+            <a href="https://www.myquest.co/myquest-skills" class="uc-dropdown-link">MyQuest Skills</a>
+            <a href="https://www.myquest.co/myquest-lms" class="uc-dropdown-link">MyQuest LMS</a>
+          </nav>
+        </div>
+        <a href="https://www.myquest.co/resource-center" class="nav-text">Resources</a>
+        <a href="https://www.myquest.co/case-studies" class="nav-text">Case Studies</a>
+        <a href="https://www.myquest.co/blog" class="nav-text">Blog</a>
+        <a href="https://www.myquest.co/about" class="nav-text">About</a>
+      </div>
+    </nav>
+    <a href="https://calendly.com/partnerships-10/myquest-parternship-call-website/?utm_source=impact-evidence-index-partnership" target="_blank" class="btn-primary-v2 is-full-on-tab">Book a demo</a>
+  </div>
+</div>
+
+
+<main>
+<div class="iei-wrap">
+  <span class="iei-badge">Preview — form not yet connected</span>
+
+  <!-- ============ SCREEN 1: LANDING ============ -->
+  <div id="iei-intro" class="iei-card">
+    <h1 class="iei-h1">The Impact <span class="iei-accent">Evidence</span> Index</h1>
+    <p class="iei-sub">If a client asked you to <strong>prove</strong> your training changed behavior — before vs. after — could you show them the evidence today?</p>
+    <p class="iei-sub">Answer 12 questions about how you baseline, follow up, tie programs to KPIs, and document results. Get your Evidence Score and see exactly where your proof breaks down.</p>
+    <div class="iei-meta">
+      <span>12 questions</span>
+      <span>Under 3 minutes</span>
+      <span>Scored across 4 evidence dimensions</span>
+    </div>
+    <button class="iei-btn" onclick="ieiStart()">Find My Evidence Score →</button>
+  </div>
+
+  <!-- ============ SCREEN 2: QUESTIONS ============ -->
+  <div id="iei-q" class="iei-card iei-hidden">
+    <div class="iei-progress-row">
+      <span id="iei-q-count">Question 1 of 12</span>
+      <span id="iei-q-dim-label"></span>
+    </div>
+    <div class="iei-bar"><div class="iei-bar-fill" id="iei-bar-fill"></div></div>
+    <div class="iei-dim-tag" id="iei-dim-tag"></div>
+    <div class="iei-q-text" id="iei-q-text"></div>
+    <div id="iei-opts"></div>
+    <div class="iei-nav-row">
+      <button class="iei-btn iei-secondary" id="iei-btn-back" onclick="ieiPrev()">← Back</button>
+      <button class="iei-btn" id="iei-btn-next" onclick="ieiNext()" disabled>Next →</button>
+    </div>
+  </div>
+
+  <!-- ============ SCREEN 3: LEAD CAPTURE ============ -->
+  <div id="iei-gate" class="iei-card iei-hidden">
+    <h1 class="iei-h1" style="font-size:26px;">Your Evidence Score is ready.</h1>
+    <p class="iei-sub">Tell us where to send your full breakdown — including your weakest evidence dimension and what to fix first.</p>
+    <!-- TODO before launch: wire this form to HubSpot (Nicole's mini-campaign) -->
+    <div class="iei-field"><label>First name</label><input type="text" id="iei-f-name" placeholder="Jane"></div>
+    <div class="iei-field"><label>Work email</label><input type="email" id="iei-f-email" placeholder="jane@trainingco.com"></div>
+    <div class="iei-field"><label>Company</label><input type="text" id="iei-f-company" placeholder="Training Co."></div>
+    <button class="iei-btn" onclick="ieiResults()">Show My Score →</button>
+    <p class="iei-fineprint">We’ll email you your results. No spam — one follow-up, that’s it.</p>
+  </div>
+
+  <!-- ============ SCREEN 4: RESULTS ============ -->
+  <div id="iei-results" class="iei-card iei-hidden">
+    <div class="iei-score-hero">
+      <div class="iei-dial">
+        <svg width="190" height="190">
+          <circle cx="95" cy="95" r="82" fill="none" stroke="#E1E6EF" stroke-width="14"/>
+          <circle id="iei-dial-arc" cx="95" cy="95" r="82" fill="none" stroke="#0046FF" stroke-width="14"
+                  stroke-linecap="round" stroke-dasharray="515" stroke-dashoffset="515"/>
+        </svg>
+        <div class="iei-num"><strong id="iei-score-num">0%</strong><small>Evidence Score</small></div>
+      </div>
+      <div class="iei-band-label" id="iei-band-label"></div>
+      <p class="iei-band-desc" id="iei-band-desc"></p>
+    </div>
+
+    <div class="iei-dims" id="iei-dims"></div>
+
+    <div class="iei-gap-box" id="iei-gap-box">
+      <h3>Where your proof breaks down first</h3>
+      <ul id="iei-gap-list"></ul>
+    </div>
+
+    <div class="iei-cta-block">
+      <p><strong>myQuest builds the before/after evidence layer into your programs</strong> — baseline capture, structured skill-building, and KPI-linked reporting your clients can actually read.</p>
+      <a class="iei-btn" href="https://calendly.com/partnerships-10/myquest-parternship-call-website/?utm_source=impact-evidence-index-partnership" target="_blank">Talk to us about closing the gap →</a>
+      <br><br>
+      <button class="iei-btn iei-secondary" onclick="location.reload()">Retake the Index</button>
+    </div>
+  </div>
+</div>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<div>
+  <div class="my-footer">
+    <div class="container-1282">
+      <div class="align-center">
+        <a href="https://www.myquest.co/" class="w-inline-block"><img src="/images/myquest-logo-white.png" loading="lazy" width="337.5" alt="myQuest Brand Logo White" class="logo-image"></a>
+        <p class="footer-para">Effortlessly develop employee skills using minimal time and resources</p>
+      </div>
+      <div class="spacer-2 _40"></div>
+      <div class="footer-grid">
+        <div class="footer-block-card">
+          <div class="footer-main-text">Privacy and Security</div>
+          <div class="footer-logo-block"><img src="/images/ISO-27001-Information-Security-1.png" loading="lazy" alt="ISO 27001 Logo" class="footer-img">
+            <div>Iso 27001 <span class="t-footer-wrap">compliant</span></div>
+          </div>
+          <div class="footer-logo-block"><img src="/images/icons8-gdpr-100-2-1_1icons8-gdpr-100-2-1.png" loading="lazy" alt="GDPR Compliant Logo" class="footer-img-2">
+            <div>GDPR <span class="t-footer-wrap">compliant</span></div>
+          </div>
+        </div>
+        <div class="footer-block-card">
+          <div class="footer-main-text">Explore</div>
+          <a href="https://www.myquest.co/" class="footer-nav-link-2">Home</a>
+          <a href="https://www.myquest.co/about" class="footer-nav-link-2">About</a>
+          <a href="https://www.myquest.co/case-studies" class="footer-nav-link-2">Case Studies</a>
+          <a href="https://www.myquest.co/blog" class="footer-nav-link-2">Blog</a>
+          <a href="https://www.myquest.co/resource-center" class="footer-nav-link-2">Resources</a>
+          <a href="https://www.myquest.co/corporate-lms" class="footer-nav-link-2">Corporate LMS Guide</a>
+          <a href="https://www.myquest.co/corporate-lms/corporate-lms-services" class="footer-nav-link-2">Corporate LMS Services</a>
+          <a href="https://www.myquest.co/corporate-lms/free-lms" class="footer-nav-link-2">Free LMS</a>
+          <a href="https://www.myquest.co/corporate-lms/best-online-corporate-learning-systems" class="footer-nav-link-2">Best Online LMS</a>
+          <a href="https://www.myquest.co/corporate-lms/lms-online" class="footer-nav-link-2">LMS Online</a>
+          <a href="https://www.myquest.co/corporate-lms-glossary" class="footer-nav-link-2">Corporate LMS Glossary</a>
+          <a href="https://www.myquest.co/site-search" class="footer-nav-link-2">Search MyQuest Website</a>
+          <a href="https://www.myquest.co/aft-learning-model" class="footer-nav-link-2">AFT Learning Model</a>
+          <a href="https://www.myquest.co/partners" class="footer-nav-link-2">Our Partners</a>
+          <a href="https://www.myquest.co/ambassador-program" class="footer-nav-link-2">Partners with myquest</a>
+        </div>
+        <div class="footer-block-card">
+          <div class="footer-main-text">Products</div>
+          <a href="https://www.myquest.co/myquest-skills" target="_blank" class="footer-nav-link-2">MyQuest Skills</a>
+          <a href="https://www.myquest.co/myquest-lms" target="_blank" class="footer-nav-link-2">MyQuest LMS</a>
+          <div class="spacer-2 _24"></div>
+          <div class="footer-main-text">Use Cases</div>
+          <a href="https://www.myquest.co/training-companies" target="_blank" class="footer-nav-link-2">Training Companies</a>
+          <a href="https://www.myquest.co/employee-training" target="_blank" class="footer-nav-link-2">Employee Training</a>
+          <a href="https://www.myquest.co/customer-training" target="_blank" class="footer-nav-link-2">Customer Training</a>
+          <a href="https://www.myquest.co/myquest-for-non-profit-organizations" target="_blank" class="footer-nav-link-2">Nonprofits</a>
+        </div>
+        <div class="footer-block-card">
+          <div class="footer-main-text">Legal</div>
+          <a href="https://app.myquest.co/legal/MyQuestPrivacyNotice.html" target="_blank" class="footer-nav-link-2">myQuest Privacy Policy</a>
+          <a href="https://app.myquest.co/legal/MyQuestTermsOfService.html" target="_blank" class="footer-nav-link-2">myQuest Terms of use</a>
+          <a href="https://app.myquest.co/legal/MyQuestDPA.html" target="_blank" class="footer-nav-link-2">myQuest Data Processing Agreement</a>
+          <div class="spacer-2 _24"></div>
+          <div class="footer-main-text">Contact</div>
+          <a href="mailto:info@myquest.co?subject=Contact%20myQuest" class="footer-nav-link-2">info@myquest.co</a>
+          <div class="spacer-2 _24"></div>
+          <div class="footer-main-text">Follow</div>
+          <a href="https://www.facebook.com/myQuestTraining/" target="_blank" class="footer-nav-link-2">Facebook</a>
+          <a href="https://www.linkedin.com/company/myquest-ltd/" target="_blank" class="footer-nav-link-2">Linkedin</a>
+          <a href="https://twitter.com/myquestt" target="_blank" class="footer-nav-link-2">Twitter</a>
+        </div>
+        <div class="footer-block-card">
+          <div class="footer-main-text">Latest Posts</div>
+          <a href="https://www.myquest.co/blog/lms-update-september-2023" class="footer-nav-link-2">Discover What&#x27;s New in Our Latest LMS Update!</a>
+          <a href="https://www.myquest.co/blog/what-is-gamification-in-training-and-should-you-adapt-it" class="footer-nav-link-2">What Is Gamification in Training and Should You Adapt It?</a>
+          <a href="https://www.myquest.co/blog/how-artificial-intelligence-enhances-learning-management-systems" class="footer-nav-link-2">How Artificial Intelligence Enhances Learning Management Systems</a>
+          <div class="spacer-2 _24"></div>
+          <a href="https://calendly.com/partnerships-10/myquest-parternship-call-website/?utm_source=impact-evidence-index-partnership" target="_blank" class="btn-footer w-button">Book a Call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="copy-right-bar">
+    <div class="container-1282">
+      <div class="copyright-block">
+        <div>@ 2012-2026 myQuest, All Rights Reserved</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.querySelector('.hamburger-icon');
+  const mobileNav = document.querySelector('.mobile-nav');
+  
+  if (hamburger && mobileNav) {
+    hamburger.addEventListener('click', (e) => {
+      e.preventDefault();
+      document.body.classList.toggle('no-scroll');
+      hamburger.classList.toggle('active');
+      
+      if (mobileNav.style.display === 'block') {
+        mobileNav.style.display = 'none';
+      } else {
+        mobileNav.style.display = 'block';
+      }
+    });
+  }
+
+  // Toggle mobile dropdowns
+  const mobileDropdowns = document.querySelectorAll('.mobile-nav .dropdown');
+  mobileDropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('.uc-dropdown-toggle');
+    const list = dropdown.querySelector('.uc-dropdown');
+    
+    if (toggle && list) {
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        dropdown.classList.toggle('active');
+        
+        if (list.style.display === 'block') {
+          list.style.display = 'none';
+        } else {
+          list.style.display = 'block';
+        }
+      });
+    }
+  });
+});
+</script>
+
+<script>
+// ===== Impact Evidence Index =====
+const IEI_DIMS = [
+  {key:"baseline", name:"Baseline & Before-State", short:"Baseline"},
+  {key:"behavior", name:"Behavior Change After Delivery", short:"Behavior Change"},
+  {key:"kpi",      name:"KPI & Business Impact", short:"KPI Linkage"},
+  {key:"docs",     name:"Documentation & Reporting", short:"Documentation"}
+];
+
+const IEI_QUESTIONS = [
+  {dim:0, text:"Before a program starts, how do you capture the current state of learner skills or behavior?",
+   opts:["We don't capture a baseline","Informal conversation with the client or managers","A self-assessment survey learners fill in","A structured pre-assessment or observed baseline (e.g. recorded practice)"]},
+  {dim:0, text:"Do you define \u2014 in writing \u2014 what changed behavior should look like after the program?",
+   opts:["No, success is left open-ended","It's loosely described in the proposal","We agree success criteria verbally with the client","Documented behavior targets, signed off by the client"]},
+  {dim:0, text:"Before delivery, do you know which of the client's business KPIs the training is supposed to move?",
+   opts:["Rarely \u2014 it doesn't come up","Sometimes discussed, never pinned down","Usually identified by name","Always \u2014 named KPIs with current values recorded"]},
+  {dim:1, text:"After delivery, how do you know whether learners actually do anything differently on the job?",
+   opts:["Honestly, we don't","Anecdotes and gut feel from managers","Scheduled manager check-ins","Structured observation or recorded practice at 30\u201390 days"]},
+  {dim:1, text:"Between and after sessions, how do learners practice the new behavior?",
+   opts:["They don't \u2014 the workshop is the program","Self-directed, if they choose to","Occasional practice exercises when time allows","Structured practice with feedback built into the program"]},
+  {dim:1, text:"What does your follow-up look like once the program ends?",
+   opts:["The program ends at delivery","A one-off follow-up email or survey","A single check-in around 30 days","A 30/60/90-day cadence measuring the same behaviors as the baseline"]},
+  {dim:2, text:"Do you compare the client's KPI values before the program with values after?",
+   opts:["Never","We've done it once or twice","For some engagements","For every engagement \u2014 it's part of the offer"]},
+  {dim:2, text:"When a KPI moves, can you show how much of that movement came from the training (vs. everything else)?",
+   opts:["We can't separate it","We make a reasonable verbal case","We use control groups or phased rollouts sometimes","We have a defined attribution approach clients accept"]},
+  {dim:2, text:"Have you ever put a monetary ROI figure on an engagement for a client?",
+   opts:["Never","We've estimated internally, never shared","Yes, for select clients on request","Yes \u2014 ROI reporting is standard in our engagements"]},
+  {dim:3, text:"What evidence of impact ends up in a document a client stakeholder could actually read?",
+   opts:["Nothing beyond the invoice","Attendance and completion records","Satisfaction / feedback scores","A before-vs-after evidence report tied to agreed criteria"]},
+  {dim:3, text:"If a client CFO asked today, \u201cWhat did we get for this spend?\u201d \u2014 how long would it take you to answer with evidence?",
+   opts:["We couldn't answer with evidence","Weeks \u2014 we'd have to reconstruct it","A few days of pulling things together","It's already on file \u2014 we'd send it same day"]},
+  {dim:3, text:"Do you use documented impact evidence in renewals, upsells, or case studies?",
+   opts:["No \u2014 renewals rest on the relationship","We reference results loosely","Sometimes, when we happen to have the data","Systematically \u2014 evidence drives our renewal conversations"]}
+];
+
+const IEI_BANDS = [
+  {min:0,  max:25, name:"Invisible Impact", color:"#C43D3D", bg:"#FBEAEA",
+   desc:"Your training may well be working \u2014 but nobody can see it. Right now the impact of your programs lives in anecdotes, and anecdotes don't survive a budget review."},
+  {min:26, max:50, name:"Anecdotal", color:"#B07818", bg:"#FBF3E0",
+   desc:"You collect fragments of proof, but there's no before/after picture. When clients push back on renewal, you're defending with stories instead of evidence."},
+  {min:51, max:75, name:"Emerging Evidence", color:"#0046FF", bg:"#E8EEFF",
+   desc:"You're measuring more than most training providers \u2014 but the chain from baseline to behavior change to KPI movement still has broken links a skeptical buyer will find."},
+  {min:76, max:100, name:"Evidence-Led", color:"#187A52", bg:"#E6F5EE",
+   desc:"You can show clients what changed, by how much, and what it was worth. Your challenge now is scale: keeping this rigor as programs grow."}
+];
+
+const IEI_GAP_COPY = {
+  baseline:"No baseline means no before/after story \u2014 start capturing pre-program skill and KPI snapshots, even lightweight ones.",
+  behavior:"Delivery without structured follow-up practice means behavior reverts. Build observation or practice checkpoints at 30/60/90 days.",
+  kpi:"Impact that isn't tied to a named client KPI reads as a cost, not an investment. Agree the KPIs \u2014 with current values \u2014 before kickoff.",
+  docs:"Evidence that isn't documented doesn't exist at renewal time. Turn what you measure into a one-page before/after report per engagement."
+};
+
+let ieiCurrent = 0;
+const ieiAnswers = new Array(IEI_QUESTIONS.length).fill(null);
+
+function ieiShow(id){
+  ["iei-intro","iei-q","iei-gate","iei-results"].forEach(s =>
+    document.getElementById(s).classList.toggle("iei-hidden", s !== id));
+  window.scrollTo({top:0});
+}
+
+function ieiStart(){ ieiCurrent = 0; ieiRender(); ieiShow("iei-q"); }
+
+function ieiRender(){
+  const q = IEI_QUESTIONS[ieiCurrent];
+  document.getElementById("iei-q-count").textContent = `Question ${ieiCurrent+1} of ${IEI_QUESTIONS.length}`;
+  document.getElementById("iei-dim-tag").textContent = IEI_DIMS[q.dim].name;
+  document.getElementById("iei-q-dim-label").textContent = `Dimension ${q.dim+1} of 4`;
+  document.getElementById("iei-q-text").textContent = q.text;
+  document.getElementById("iei-bar-fill").style.width = `${(ieiCurrent/IEI_QUESTIONS.length)*100}%`;
+
+  const box = document.getElementById("iei-opts");
+  box.innerHTML = "";
+  q.opts.forEach((label,i)=>{
+    const b = document.createElement("button");
+    b.className = "iei-opt" + (ieiAnswers[ieiCurrent]===i ? " iei-selected" : "");
+    b.textContent = label;
+    b.onclick = ()=>{ ieiAnswers[ieiCurrent]=i; ieiRender(); document.getElementById("iei-btn-next").disabled=false; };
+    box.appendChild(b);
+  });
+  document.getElementById("iei-btn-back").style.visibility = ieiCurrent===0 ? "hidden" : "visible";
+  document.getElementById("iei-btn-next").disabled = ieiAnswers[ieiCurrent]===null;
+  document.getElementById("iei-btn-next").textContent = ieiCurrent===IEI_QUESTIONS.length-1 ? "See My Score \u2192" : "Next \u2192";
+}
+
+function ieiNext(){
+  if(ieiCurrent < IEI_QUESTIONS.length-1){ ieiCurrent++; ieiRender(); }
+  else ieiShow("iei-gate");
+}
+function ieiPrev(){ if(ieiCurrent>0){ ieiCurrent--; ieiRender(); } }
+
+function ieiResults(){
+  // TODO before launch: capture iei-f-name / iei-f-email / iei-f-company -> HubSpot here
+  const dimScores = IEI_DIMS.map(()=>({got:0,max:0}));
+  IEI_QUESTIONS.forEach((q,i)=>{ dimScores[q.dim].got += ieiAnswers[i]??0; dimScores[q.dim].max += 3; });
+  const total = dimScores.reduce((s,d)=>s+d.got,0);
+  const max   = dimScores.reduce((s,d)=>s+d.max,0);
+  const pct   = Math.round((total/max)*100);
+  const band  = IEI_BANDS.find(b=>pct>=b.min && pct<=b.max);
+
+  ieiShow("iei-results");
+
+  document.getElementById("iei-score-num").textContent = pct + "%";
+  const arc = document.getElementById("iei-dial-arc");
+  arc.style.stroke = band.color;
+  setTimeout(()=>{ arc.style.transition="stroke-dashoffset .9s ease"; arc.style.strokeDashoffset = 515 - (515*pct/100); }, 60);
+
+  const bl = document.getElementById("iei-band-label");
+  bl.textContent = band.name;
+  bl.style.color = band.color; bl.style.background = band.bg;
+  document.getElementById("iei-band-desc").textContent = band.desc;
+
+  const dimsBox = document.getElementById("iei-dims");
+  dimsBox.innerHTML = "";
+  const ranked = [];
+  dimScores.forEach((d,i)=>{
+    const p = Math.round((d.got/d.max)*100);
+    ranked.push({i,p});
+    const color = p<=33 ? "#C43D3D" : p<=66 ? "#B07818" : "#187A52";
+    dimsBox.insertAdjacentHTML("beforeend",
+      `<div class="iei-dim-row">
+         <div class="iei-dim-head"><span>${IEI_DIMS[i].name}</span><span>${p}%</span></div>
+         <div class="iei-dim-bar"><div class="iei-dim-fill" style="width:${p}%;background:${color}"></div></div>
+       </div>`);
+  });
+
+  ranked.sort((a,b)=>a.p-b.p);
+  const gapList = document.getElementById("iei-gap-list");
+  gapList.innerHTML = "";
+  ranked.slice(0,2).forEach(r=>{
+    gapList.insertAdjacentHTML("beforeend",
+      `<li><strong>${IEI_DIMS[r.i].short}:</strong> ${IEI_GAP_COPY[IEI_DIMS[r.i].key]}</li>`);
+  });
+}
+</script>
+
+</body>
+</html>
