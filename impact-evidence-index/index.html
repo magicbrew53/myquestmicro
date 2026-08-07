@@ -1278,7 +1278,7 @@ section {
       <p><strong>myQuest builds the before/after evidence layer into your programs</strong> — baseline capture, structured skill-building, and KPI-linked reporting your clients can actually read.</p>
       <a class="iei-btn" href="https://calendly.com/partnerships-10/myquest-parternship-call-website/?utm_source=impact-evidence-index-partnership" target="_blank">Talk to us about closing the gap →</a>
       <br><br>
-      <button class="iei-btn iei-secondary" onclick="location.reload()">Retake the Index</button>
+      <button class="iei-btn iei-secondary" onclick="ieiRetake()">Retake the Index</button>
     </div>
   </div>
 </div>
@@ -1503,6 +1503,15 @@ function ieiNext(){
   else ieiResults();
 }
 function ieiPrev(){ if(ieiCurrent>0){ ieiCurrent--; ieiRender(); } }
+
+function ieiRetake(){
+  ieiCurrent = 0;
+  ieiAnswers.fill(null);
+  const arc = document.getElementById("iei-dial-arc");
+  arc.style.transition = "none";
+  arc.style.strokeDashoffset = 515;
+  ieiShow("iei-intro");
+}
 
 function ieiResults(){
   const dimScores = IEI_DIMS.map(()=>({got:0,max:0}));
