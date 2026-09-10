@@ -62,7 +62,7 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 4. Calendly CTA URL — `https://calendly.com/partnerships-10/myquest-parternship-call-website/?utm_source={slug}-partnership` (appears 5×: desktop nav, mobile nav, hero, CTA section, footer "Book a Call"). Note: the `partnerships-10/myquest-parternship-call-website` path is verbatim from the live Calendly link, including the existing spelling; do not "fix" it.
 5. Hero: partnership tag, headline, subhead, three stat cards, co-brand lockup (myQuest × prospect logo on black; prospect logo embedded as data URI)
 6. Gap section: title, body argument, pullquote card sourced from the **prospect's own published materials**
-7. Video section: heading + Vimeo embed (`?title=0&byline=0&portrait=0&dnt=1`; Tooling U-SME ID is `1197951399`)
+7. Video section: heading + YouTube embed (`youtube-nocookie.com/embed/{id}?rel=0&modestbranding=1`; Tooling U-SME ID is `shZKfdM6peI`)
 8. Three theme cards, each with a content column and a gradient "pitch in one line" card
 9. Skill-map illustration (webp data URI) — named skills must fit the prospect's audience (Tooling U-SME version: Active Listening, Conflict Resolution, Incident Response). Approved decision (2026-07-07): all five sites use the same illustration (the Tooling U-SME original, copied verbatim); only the alt text varies per prospect.
 10. Pilot-shape card — the "Content" row names the prospect's catalog (e.g., "Layered on existing Tooling U-SME courses")
@@ -84,7 +84,7 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 - Co-brand lockup: myQuest white logo × prospect logo on a pure black pill (handles JPEG-with-black-background prospect logos).
 - Single CTA action across the entire page: Book a demo (Calendly). No secondary CTAs, no nav links added, no contact forms.
 - Section order is fixed: hero → gap → video → three themes (with skill-map illustration) → how-it-works → trust strip → CTA/pilot → footer. Deviations require approval.
-- Vimeo embeds always use `title=0&byline=0&portrait=0&dnt=1`.
+- Video embeds use the privacy-enhanced `www.youtube-nocookie.com/embed/{id}` host with `rel=0&modestbranding=1` (migrated from Vimeo 2026-09-10).
 - Mobile behavior (hamburger, stacking) must match the Tooling U-SME page.
 
 ---
@@ -104,7 +104,7 @@ Verified against the code at HEAD (single commit, `main`) plus the approved rest
 
 ## 4. Architecture: the template-and-folders model
 
-**`/_template/index.html` is the structural source of truth.** It is the full page — chrome plus every body section in fixed order — with every per-prospect slot marked by an unmistakable placeholder token (`{{PROSPECT_NAME}}`, `{{SLUG}}`, `{{HERO_HEADLINE}}`, `{{STAT_1_VALUE}}`, `{{PULLQUOTE}}`, `{{VIMEO_ID}}`, `{{THEME_1_TITLE}}`, `{{COBRAND_LOGO_DATA_URI}}`, `{{SKILLMAP_DATA_URI}}`, etc.). It is derived from the Tooling U-SME page in Chunk 0 by extracting its structure and replacing prospect content with tokens.
+**`/_template/index.html` is the structural source of truth.** It is the full page — chrome plus every body section in fixed order — with every per-prospect slot marked by an unmistakable placeholder token (`{{PROSPECT_NAME}}`, `{{SLUG}}`, `{{HERO_HEADLINE}}`, `{{STAT_1_VALUE}}`, `{{PULLQUOTE}}`, `{{YOUTUBE_ID}}`, `{{THEME_1_TITLE}}`, `{{COBRAND_LOGO_DATA_URI}}`, `{{SKILLMAP_DATA_URI}}`, etc.). It is derived from the Tooling U-SME page in Chunk 0 by extracting its structure and replacing prospect content with tokens.
 
 - `/_template/` is never linked from anywhere and additionally ships `noindex, nofollow, noarchive`. It exists for builders, not visitors.
 - **New prospect page = copy `/_template/index.html` into `/{slug}/`, fill every token from the approved content doc.** A page ships with zero `{{` sequences remaining — grep-verified.
@@ -148,7 +148,7 @@ These pages exist to prove diligence. A single invented statistic, misattributed
 4. Create `/_template/index.html` from the moved page: identical structure and chrome, all ten swap-surface elements replaced with `{{TOKEN}}` placeholders, `noindex` retained.
 5. Verify on the Vercel preview: root redirects; `/tooling-u-sme/` renders pixel-identical to the pre-move page (all images load, all 5 Calendly links intact); `/_template/` renders as an obviously tokenized skeleton.
 
-**Chunks 1–4 — one branch per site (`site-nccer`, `site-intertek-alchemy`, `site-penn-foster`, `site-vector-solutions`),** each built only after James delivers the approved content doc, prospect logo, and Vimeo ID for that prospect.
+**Chunks 1–4 — one branch per site (`site-nccer`, `site-intertek-alchemy`, `site-penn-foster`, `site-vector-solutions`),** each built only after James delivers the approved content doc, prospect logo, and YouTube ID for that prospect.
 
 **Acceptance checklist for every new page (report each PASS/FAIL):**
 - [ ] `noindex, nofollow, noarchive` present
@@ -156,7 +156,7 @@ These pages exist to prove diligence. A single invented statistic, misattributed
 - [ ] All 5 Calendly links carry `utm_source={slug}-partnership`
 - [ ] Title and meta description follow the pattern and name the prospect
 - [ ] Co-brand lockup renders prospect logo correctly on black (hero and footer mini-lockup)
-- [ ] Vimeo embed uses the correct per-prospect video ID with `title=0&byline=0&portrait=0&dnt=1`
+- [ ] YouTube embed uses the correct per-prospect video ID on `youtube-nocookie.com` with `rel=0&modestbranding=1`
 - [ ] All copy matches the approved content doc exactly (no paraphrasing)
 - [ ] Banned strings absent: grep for "AI practice", "simulation", "role-play", "practice platform" returns nothing in body copy
 - [ ] Zero `{{` placeholder sequences remain in the file
